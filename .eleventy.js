@@ -1,14 +1,32 @@
-// importing a library to allow for easier date conversions (see line 14)
-const eleventyNavigationPlugin = require('@11ty/eleventy-navigation');
+// * JS Refactor to config/11ty  * //
+// * https://github.com/madrilene/eleventy-excellent * //
+
+// * Require 11ty Plugins * //
+
+// * Long DateTime Issue * //
 const { DateTime } = require('luxon');
 
+// * Navbar plugin * //
+const eleventyNavigationPlugin = require('@11ty/eleventy-navigation');
+
+// * Export Functions * //
 module.exports = function (eleventyConfig) {
+
+  // * Add Plugins Here * //
+
+  // * Navbar plugin * //
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
+
+  // * Add PassThroughCopy Here * //
+
+  // * Assets - pass through existing, trigger new build on any change* //
+
   // allows css, assets, and CMS config files to be passed into /public
   eleventyConfig.addPassthroughCopy('./src/css/**/*.css');
   eleventyConfig.addPassthroughCopy('./src/assets');
   eleventyConfig.addPassthroughCopy('./src/admin');
   eleventyConfig.addPassthroughCopy('.src/_redirects');
+
   // Put robots.txt in root
   eleventyConfig.addPassthroughCopy({ 'src/robots.txt': '/robots.txt' });
 
@@ -17,8 +35,12 @@ module.exports = function (eleventyConfig) {
     files: './public/css/**/*.css',
   });
 
-  // normally, 11ty will render dates on blog posts in full JSDate format (Fri Dec 02 18:00:00 GMT-0600). That's ugly
-  // this filter allows dates to be converted into a normal, locale format. view the docs to learn more (https://moment.github.io/luxon/api-docs/index.html#datetime)
+  // * Shortcodes * //
+
+  // * Filters * //
+
+  // (https://moment.github.io/luxon/api-docs/index.html#datetime)
+  // * Long DateTime Issue * //
   eleventyConfig.addFilter('postDate', (dateObj) => {
     return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
   });
