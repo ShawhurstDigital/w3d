@@ -1,25 +1,36 @@
 {
-  "name": "starter-kit-v4",
+  "name": "w3d",
   "version": "1.0.0",
-  "description": "",
+  "description": "Rework V4",
   "main": "index.js",
   "scripts": {
-    "start": "eleventy --serve",
-    "build": "eleventy"
+    "watch:clean": "rimraf ./public/*",
+    "watch:11ty": "npx @11ty/eleventy --serve",
+    "build:clean": "rimraf ./public/*",
+    "build:11ty": "eleventy",
+    "start": "run-p watch:*",
+    "build": "run-p build:*",
+    "debug": "DEBUG=* npx @11ty/eleventy"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OakHarbor/Starter-Kit-v4-Eleventy-.git"
+    "url": "git+https://github.com/ShawhurstDigital/w3d.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Shawhurst Digital",
+  "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/OakHarbor/Starter-Kit-v4-Eleventy-/issues"
+    "url": "https://github.com/ShawhurstDigital/w3d/issues"
   },
-  "homepage": "https://github.com/OakHarbor/Starter-Kit-v4-Eleventy-#readme",
+  "homepage": "https://github.com/ShawhurstDigital/w3d#readme",
   "devDependencies": {
     "@11ty/eleventy": "^1.0.2",
-    "@11ty/eleventy-navigation": "^0.3.5"
+    "@11ty/eleventy-navigation": "^0.3.5",
+    "netlify-cli": "^2.37.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2"
+  },
+  "dependencies": {
+    "netlify-cms-app": "^2.15.72"
   }
 }
